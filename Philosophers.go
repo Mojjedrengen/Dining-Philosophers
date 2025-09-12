@@ -24,7 +24,7 @@ func forkgeneric(resive <-chan string, leftmsg chan<- string, rightmsg chan<- st
 
 		var msg = <-resive
 
-		fmt.Printf("fork got msg: %s and isTaken == %t\n", msg, isTaken)
+		//		fmt.Printf("fork got msg: %s and isTaken == %t\n", msg, isTaken)
 
 		if msg == "left" {
 			if isTaken == false {
@@ -118,7 +118,7 @@ func main() {
 	go philosofGeneric(fork3, fork2, philosof2L, philosof2R, 2)
 	go philosofGeneric(fork4, fork3, philosof3L, philosof3R, 3)
 	go philosofGeneric(fork5, fork4, philosof4L, philosof4R, 4)
-	go philosofGeneric(fork1, fork5, philosof5L, philosof5L, 5)
+	go philosofGeneric(fork1, fork5, philosof5L, philosof5R, 5)
 
 	for true {
 	}
