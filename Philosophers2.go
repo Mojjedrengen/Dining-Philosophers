@@ -35,28 +35,18 @@ func forks(leftChan chan Calls, rightChan chan Calls, nr int) {
 		case msg = <-leftChan:
 		case msg = <-rightChan:
 		}
-		//fmt.Printf("%v and is taken = %b\n", msg, isTaken)
 		if isTaken && msg == Leave {
 			isTaken = false
 		} else if !isTaken && msg == Left {
-			//fmt.Printf("H1\n")
-			//fmt.Printf("%d: msg = %v and chan = %v\n", nr, msg, <-leftChan)
 			respond(leftChan, Free)
 			isTaken = true
-			//fmt.Printf("sent msg free to left\n")
 		} else if !isTaken && msg == Right {
-			//fmt.Printf("H2\n")
 			respond(rightChan, Free)
 			isTaken = true
-			//fmt.Printf("sent msg free to right\n")
 		} else if isTaken && msg == Left {
-			//fmt.Printf("H3\n")
 			respond(leftChan, Taken)
-			//fmt.Printf("sent msg taken to left\n")
 		} else if isTaken && msg == Right {
-			//fmt.Printf("H4\n")
 			respond(rightChan, Taken)
-			//fmt.Printf("sent msg taken to left\n")
 		}
 
 	}
@@ -82,7 +72,6 @@ func philosof(domHandChan chan Calls, subHandChan chan Calls, nr int) {
 		if state == Thinking {
 			respond(domHandChan, domHand)
 			if <-domHandChan == Free {
-				//fmt.Printf("%d got main fork\n", nr)
 				for state == Thinking {
 					respond(subHandChan, subHand)
 					if <-subHandChan == Free {
