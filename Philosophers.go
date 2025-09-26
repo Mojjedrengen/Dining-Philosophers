@@ -5,18 +5,21 @@ import (
 	"time"
 )
 
+/*
 type PhilosoferState int
 
 const (
+
 	Eating PhilosoferState = iota
 	Thinking
+
 )
 
-var PhilosoferStateName = map[PhilosoferState]string{
-	Eating:   "Eating",
-	Thinking: "Thinking",
-}
-
+	var PhilosoferStateName = map[PhilosoferState]string{
+		Eating:   "Eating",
+		Thinking: "Thinking",
+	}
+*/
 var ch1 = make(chan string)
 var ch2 = make(chan string)
 
@@ -59,6 +62,7 @@ lige er venstre håndet
 ulige er højre
 philosofer er stædige
 */
+
 func philosofGeneric(leftFork chan<- string, rightFork chan<- string, leftForkMsg <-chan string, rightForkMsg <-chan string, philosofer int, leftForkRank int, rightForkRank int) {
 	var timesEaten int = 0
 	var state PhilosoferState = Thinking
