@@ -5,9 +5,24 @@ import (
 	"time"
 )
 
-//lige er venstre håndet
-//ulige er højre
-//philosofer er stædige
+/*
+To make sure that the program does not lead to a deadlock we have 3 statements
+(1) Even numbered Philosofers are left handed
+(2) Odd numbered Philosofers are right handed
+and (3) Philosofers are stubborn
+
+Number (1) and (2) makes it so that the Philosofers alternates between which fork they want first
+Because they alternate between the side they want to grab first, they free up Philosofer 5.
+
+Number (3) means that once a Philosofer gets their main fork they would not release it before they get the other one.
+In tandem with (1) and (2) this makes it so that the philosofers all gets to eat.
+
+This does not make sure that the Philosofers eats an equal amount of food by it self.
+
+To give the Philosofers time to think we make them wait for 0.5s before attempting to grab their main fork after they have put them down
+Inadvertently this made it so that the Philosofers eat an equal amount of food.
+To make it so that they do not wait while thinking comment out line 104
+*/
 
 type Calls int
 
@@ -86,7 +101,7 @@ func philosof(domHandChan chan Calls, subHandChan chan Calls, nr int) {
 			respond(subHandChan, Leave)
 			state = Thinking
 			fmt.Printf("%d is now Thinking.\n", nr)
-			time.Sleep(500 * time.Millisecond)
+			time.Sleep(500 * time.Millisecond) // <- Comment out to make the Philosofers not wait while thinking
 		}
 	}
 }
